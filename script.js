@@ -1614,22 +1614,23 @@ requestAnimationFrame(animate);
 function updatePieceCount() {
   const count = puzzle.polyPieces.length - 1;
   console.log(count);
+  document.getElementById("puzzleCount").textContent = `Pieces Left: ${count}`;
   return count;
 }
-
 let timerInterval;
-let timerSeconds = 0;
+let timerSeconds = 60;
 
 function startTimer() {
   stopTimer();
   timerSeconds = 60;
   updateTimerDisplay();
-  if (timerSeconds > 0 && time != "stop") {
-    timerInterval = setInterval(() => {
-      timerSeconds--;
-      updateTimerDisplay();
-    }, 1000);
-  }
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+  }, 1000);
+}
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
 }
 
 function updateTimerDisplay() {
@@ -1639,5 +1640,8 @@ function updateTimerDisplay() {
   if (timerEl) timerEl.textContent = `${min}:${sec}`;
   if (timerSeconds === 0) {
     alert("timeout! " + updatePieceCount() + " pieces remaining");
+  }
+  if (timerSeconds <= 10) {
+    $(".timer").css({ "animation-duration": "0.5s" });
   }
 }

@@ -56,3 +56,35 @@ body {
   overflow: hidden;
   position: absolute;
 }
+
+.timer {
+  position: fixed;
+  top: 17px;
+  right: 22px;
+  font-size: 25px;
+  color: #ff6600;
+  z-index: 999;
+  font-weight: bold;
+  background-color: #3d3d3d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  animation: heartBeat;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.puzzleCount {
+  position: fixed;
+  top: 17px;
+  left: 50px;
+  font-size: 25px;
+  color: #ff6600;
+  z-index: 999;
+  font-weight: bold;
+  background-color: #3d3d3d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  animation: shakeX;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
