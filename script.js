@@ -23,7 +23,7 @@ function alea(min, max) {
   return min + (max - min) * mrandom();
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function intAlea(min, max) {
   // random integer number [min..max[ . If no max is provided, [0..min[
@@ -35,7 +35,7 @@ function intAlea(min, max) {
   return mfloor(min + (max - min) * mrandom());
 } // intAlea
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function arrayShuffle(array) {
   /* randomly changes the order of items in an array
@@ -1420,6 +1420,7 @@ let events = []; // queue for events
         /* this time out must be a bit longer than the css .moving transition-duration */
         setTimeout(() => events.push({ event: "finished" }), 1200);
         state = 35;
+        startTimer();
         break;
 
       case 35: // wait for end of movement
@@ -1429,7 +1430,7 @@ let events = []; // queue for events
         });
 
         state = 50;
-
+        updatePieceCount();
         break;
 
       /* wait for user grabbing a piece or other action */
@@ -1467,6 +1468,7 @@ let events = []; // queue for events
             return;
           }
         } // for k
+        updatePieceCount();
         break;
 
       case 55: // moving piece
@@ -1507,7 +1509,7 @@ let events = []; // queue for events
             if (puzzle.polyPieces.length == 1) state = 60; // won!
             return;
         } // switch (event.event)
-
+        updatePieceCount();
         break;
 
       case 60: // winning
@@ -1606,3 +1608,36 @@ autoStart = isMiniature(); // used for nice miniature in CodePen
 
 loadInitialFile();
 requestAnimationFrame(animate);
+
+function updatePieceCount() {
+  const count = puzzle.polyPieces.length;
+  console.log(count);
+  return count;
+}
+
+let timerInterval;
+let timerSeconds = 0;
+
+function startTimer() {
+  stopTimer();
+  timerSeconds = 0;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+}
+
+function updateTimerDisplay() {
+  const min = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
+  const sec = String(timerSeconds % 60).padStart(2, "0");
+  const timerEl = document.getElementById("timer");
+  if (timerEl) timerEl.textContent = `${min}:${sec}`;
+  if (timerSeconds === 60) {
+    alert("timeout! " + updatePieceCount() + " pieces remaining");
+  }
+}
