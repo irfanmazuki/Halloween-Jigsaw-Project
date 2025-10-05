@@ -1513,6 +1513,7 @@ let events = []; // queue for events
         break;
 
       case 60: // winning
+        const time = "stop";
         puzzle.container.innerHTML = "";
         puzzle.getContainerSize();
         fitImage(tmpImage, puzzle.contWidth * 0.95, puzzle.contHeight * 0.95);
@@ -1537,6 +1538,7 @@ let events = []; // queue for events
         puzzle.container.appendChild(tmpImage);
         state = 65;
         menu.open();
+        return time;
 
       case 65: // wait for new number of pieces - of new picture
         if (event && event.event == "nbpieces") {
@@ -1610,7 +1612,7 @@ loadInitialFile();
 requestAnimationFrame(animate);
 
 function updatePieceCount() {
-  const count = puzzle.polyPieces.length;
+  const count = puzzle.polyPieces.length - 1;
   console.log(count);
   return count;
 }
@@ -1620,16 +1622,14 @@ let timerSeconds = 0;
 
 function startTimer() {
   stopTimer();
-  timerSeconds = 0;
+  timerSeconds = 60;
   updateTimerDisplay();
-  timerInterval = setInterval(() => {
-    timerSeconds++;
-    updateTimerDisplay();
-  }, 1000);
-}
-
-function stopTimer() {
-  if (timerInterval) clearInterval(timerInterval);
+  if (timerSeconds > 0 && time != "stop") {
+    timerInterval = setInterval(() => {
+      timerSeconds--;
+      updateTimerDisplay();
+    }, 1000);
+  }
 }
 
 function updateTimerDisplay() {
@@ -1637,7 +1637,7 @@ function updateTimerDisplay() {
   const sec = String(timerSeconds % 60).padStart(2, "0");
   const timerEl = document.getElementById("timer");
   if (timerEl) timerEl.textContent = `${min}:${sec}`;
-  if (timerSeconds === 60) {
+  if (timerSeconds === 0) {
     alert("timeout! " + updatePieceCount() + " pieces remaining");
   }
 }
