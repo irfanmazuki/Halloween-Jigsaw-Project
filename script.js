@@ -7,4 +7,3 @@ function closeModal(modalId) {
     myModal2.style.display = "none";
   }
 }
-

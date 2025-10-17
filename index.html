@@ -49,22 +49,25 @@
           complete the puzzle! <br />Good luck!
         </p>
         <img
-          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+          class="image-select"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRphdeMO3c56E2CSYAbDVgXm1GXW0OhGAbSQ&s"
           alt="Pumpkin"
           id="defaultImage"
-          width="100px;"
+          onclick="selectImage(this.src)"
         />
         <img
-          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+          class="image-select"
+          src="https://media.livewallpapers.com/images/high/spooky-halloween-phone-wallpaper-25.webp"
           alt="Ghost"
           id="ghostImage"
-          width="100px;"
+          onclick="selectImage(this.src)"
         />
         <img
-          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+          class="image-select"
+          src="https://i.pinimg.com/736x/0c/6e/85/0c6e85bf0ae7b2ffcac94a69273060e8.jpg"
           alt="Black Cat"
           id="catImage"
-          width="100px;"
+          onclick="selectImage(this.src)"
         />
       </div>
     </div>
@@ -75,6 +78,7 @@
         <span id="close2" onclick="closeModal(2)">&times;</span>
         <p>Condition fulfilled! This is the modal content.</p>
       </div>
+      <input type="text" id="selectedImageURL" style="display: none" />
     </div>
 
     <button id="checkConditionBtn">Check Condition</button>

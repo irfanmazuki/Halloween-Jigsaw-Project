@@ -1268,9 +1268,23 @@ let loadFile;
 } //  // scope for loadFile
 
 function loadInitialFile() {
-  puzzle.srcImage.src =
-    "https://images.template.net/459806/Happy-Halloween-Wallpaper-Template-edit-online.png";
+  puzzle.srcImage.src = document.getElementById("selectedImageURL").value;
 }
+
+window.selectImage = function (url) {
+  const input = document.getElementById("selectedImageURL");
+  if (input) input.value = url;
+  // close the instruction modal if present
+  const instr = document.getElementById("myModal");
+  if (instr) instr.style.display = "none";
+  // call the module-local loader
+  if (typeof loadInitialFile === "function") {
+    loadInitialFile();
+  } else {
+    // fallback: dispatch an event (module can listen if you choose to add a listener)
+    document.dispatchEvent(new CustomEvent("jigsaw-select-image"));
+  }
+};
 //-----------------------------------------------------------------------------
 function imageLoaded(puzzle) {
   events.push({ event: "srcImageLoaded" });
