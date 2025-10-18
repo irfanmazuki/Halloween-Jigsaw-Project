@@ -1,6 +1,7 @@
 "use strict";
 
 let puzzle, autoStart;
+let remainingPieces = 0;
 
 const mhypot = Math.hypot,
   mrandom = Math.random,
@@ -1529,6 +1530,7 @@ let events = []; // queue for events
 
       case 60: // winning
         stopTimer();
+        gameEnded();
         const time = "stop";
         puzzle.container.innerHTML = "";
         puzzle.getContainerSize();
@@ -1630,6 +1632,7 @@ requestAnimationFrame(animate);
 
 function updatePieceCount() {
   const count = puzzle.polyPieces.length - 1;
+  remainingPieces = count;
   console.log(count);
   document.getElementById("puzzleCount").textContent = `Pieces Left: ${count}`;
   return count;
@@ -1639,7 +1642,7 @@ let timerSeconds = 60;
 
 function startTimer() {
   stopTimer();
-  timerSeconds = 15;
+  timerSeconds = 30;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timerSeconds--;
@@ -1669,6 +1672,26 @@ function updateTimerDisplay() {
 
 // End Game condition function
 function gameEnded() {
+  let candies = 0;
+  if (remainingPieces === 0) {
+    candies = 5;
+  } else if (remainingPieces <= 2) {
+    candies = 4;
+  } else if (remainingPieces <= 3) {
+    candies = 3;
+  } else if (remainingPieces <= 4) {
+    candies = 2;
+  } else if (remainingPieces <= 10) {
+    candies = 1;
+  }
   const myModal2 = document.getElementById("myModal2");
   myModal2.style.display = "block";
+  let candyDiv = document.getElementById("candies");
+  var candyHtml = "";
+  for (let i = 0; i < candies; i++) {
+    candyHtml += '<img src="candy.png" alt="candy" />';
+  }
+  candyDiv.innerHTML = candyHtml;
+  let candyCount = document.getElementById("candyCount");
+  candyCount.textContent = candies;
 }
