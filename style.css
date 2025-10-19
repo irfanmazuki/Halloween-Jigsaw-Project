@@ -7,27 +7,6 @@ body {
   cursor: pointer;
 }
 
-#menu {
-  position: relative;
-  list-style-type: none;
-  padding-left: 5px;
-  z-index: 1000;
-  /* 1 */
-  display: inline-block;
-  text-align: center;
-}
-
-#menu li {
-  margin: 2px;
-  padding: 4px 10px;
-  border-radius: 5px;
-  background-color: #ffff80;
-}
-
-#menu li:hover {
-  background-color: #ffdd60;
-}
-
 #forPuzzle {
   position: absolute;
   width: 95vw;
@@ -185,4 +164,23 @@ body {
 
 .candies img {
   width: 100px;
+}
+
+#menu {
+  border: 1px solid white;
+  background-color: white;
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+#myBtn {
+  border: none;
+  background-color: white;
+  font-size: 20px;
+  color: white;
 }

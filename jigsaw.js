@@ -1269,10 +1269,12 @@ let loadFile;
 } //  // scope for loadFile
 
 function loadInitialFile() {
+  console.log("loadInitialFile called");
   puzzle.srcImage.src = document.getElementById("selectedImageURL").value;
 }
 
 window.selectImage = function (url) {
+  console.log("selectImage called with url:", url);
   const input = document.getElementById("selectedImageURL");
   if (input) input.value = url;
   // close the instruction modal if present
@@ -1288,8 +1290,12 @@ window.selectImage = function (url) {
 };
 //-----------------------------------------------------------------------------
 function imageLoaded(puzzle) {
+  console.log("imageLoaded called");
   events.push({ event: "srcImageLoaded" });
   puzzle.imageLoaded = true;
+  // Set autoStart flag so animate will trigger 12 pieces at the right time
+  autoStart = true;
+  console.log("Set autoStart = true for 12 pieces");
 } // imageLoaded
 
 //-----------------------------------------------------------------------------
@@ -1330,6 +1336,7 @@ let events = []; // queue for events
 
     let event;
     if (events.length) event = events.shift(); // read event from queue
+    if (event) console.log("Animate event:", event, "State:", state);
     if (event && event.event == "reset") state = 0;
     if (event && event.event == "srcImageLoaded") state = 0;
     // resize event
@@ -1375,11 +1382,13 @@ let events = []; // queue for events
     switch (state) {
       /* initialisation */
       case 0:
+        console.log("animate state 0");
         state = 10;
         break;
 
       /* wait for image loaded and other required parameters*/
       case 10:
+        console.log("animate state 10");
         if (!puzzle.imageLoaded) return;
         //                if (!(puzzle.autoStart || event && event.event == "srcImageLoaded")) return;
 
@@ -1396,6 +1405,7 @@ let events = []; // queue for events
 
       /* wait for choice of number of pieces */
       case 15:
+        console.log("animate state 15, autoStart:", autoStart, "event:", event);
         if (autoStart) event = { event: "nbpieces", nbpieces: 12 }; // auto start
         autoStart = false; // not twice
         if (!event) return;
@@ -1408,7 +1418,6 @@ let events = []; // queue for events
         } else return;
 
       case 20:
-        menu.close();
         /* prepare puzzle */
         puzzle.create(); // create shape of pieces, independant of size
         puzzle.scale();
@@ -1423,7 +1432,7 @@ let events = []; // queue for events
         break;
 
       case 25: // spread pieces
-        puzzle.gameCanvas.style.display = "none"; // hide reference image
+        // puzzle.gameCanvas.style.display = "none"; // hide reference image (REMOVED to keep jigsaw visible)
         puzzle.polyPieces.forEach((pp) => {
           pp.canvas.classList.add("moving");
         });
@@ -1536,8 +1545,6 @@ let events = []; // queue for events
         puzzle.getContainerSize();
         fitImage(tmpImage, puzzle.contWidth * 0.95, puzzle.contHeight * 0.95);
         tmpImage.style.boxShadow = "4px 4px 4px rgba(0, 0, 0, 0.5)";
-        //              tmpImage.style.top=(puzzle.polyPieces[0].y + puzzle.scaley / 2) / puzzle.contHeight * 100 + 50 + "%" ;
-        //              tmpImage.style.left=(puzzle.polyPieces[0].x + puzzle.scalex / 2) / puzzle.contWidth * 100 + 50 + "%" ;
         tmpImage.style.left =
           ((puzzle.polyPieces[0].x + puzzle.scalex / 2 + puzzle.gameWidth / 2) /
             puzzle.contWidth) *
@@ -1555,7 +1562,6 @@ let events = []; // queue for events
         setTimeout(() => (tmpImage.style.top = tmpImage.style.left = "50%"), 0);
         puzzle.container.appendChild(tmpImage);
         state = 65;
-        menu.open();
         return time;
 
       case 65: // wait for new number of pieces - of new picture
@@ -1578,45 +1584,6 @@ let events = []; // queue for events
 } // scope for animate
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-
-/* analyze menu */
-let menu = (function () {
-  let menu = { items: [] };
-  document.querySelectorAll("#menu li").forEach((menuEl) => {
-    let kItem = menu.items.length;
-    let item = { element: menuEl, kItem: kItem };
-    menu.items[kItem] = item;
-  });
-
-  menu.open = function () {
-    menu.items.forEach((item) => (item.element.style.display = "block"));
-    menu.opened = true;
-  };
-  menu.close = function () {
-    menu.items.forEach((item, k) => {
-      if (k > 0) item.element.style.display = "none"; // never hide element 0
-    });
-    menu.opened = false;
-  };
-  menu.items[0].element.addEventListener("click", () => {
-    if (menu.opened) menu.close();
-    else menu.open();
-  });
-  menu.items[1].element.addEventListener("click", loadInitialFile);
-  menu.items[2].element.addEventListener("click", loadFile);
-  menu.items[3].element.addEventListener("click", () => {});
-  for (let k = 4; k < menu.items.length; ++k) {
-    menu.items[k].element.addEventListener("click", () =>
-      events.push({
-        event: "nbpieces",
-        nbpieces: [12, 25, 50, 100, 200][k - 4],
-      })
-    );
-  }
-  return menu;
-})();
-
-menu.close();
 
 window.addEventListener("resize", (event) => {
   // do not accumulate resize events in events queue - keep only current one
