@@ -19,22 +19,22 @@
     <div id="forPuzzle"></div>
     <ul id="menu">
       <li>&#x2630;</li>
-      <li>default image</li>
-      <li>load image</li>
+      <li>_</li>
+      <li>_</li>
       <li>
         shape:
         <select id="shape">
-          <option value="1" selected>classic</option>
-          <option value="2">triangle</option>
-          <option value="3">round</option>
-          <option value="4">straight</option>
+          <option value="1" selected>_</option>
+          <option value="2">_</option>
+          <option value="3">_</option>
+          <option value="4">_</option>
         </select>
       </li>
-      <li>12 pieces</li>
-      <li>25 pieces</li>
-      <li>50 pieces</li>
-      <li>100 pieces</li>
-      <li>200 pieces</li>
+      <li>_</li>
+      <li>_</li>
+      <li>_</li>
+      <li>_</li>
+      <li>_</li>
     </ul>
 
     <!-- Trigger/Open The Modal -->
@@ -75,13 +75,22 @@
     <!-- The End Game Modal -->
     <div id="myModal2" class="modal" style="display: none">
       <div class="modal-content">
-        <span class="close" onclick="closeModal(2)">&times;</span>
         <p id="modalText2">
-          Time's Up! You gained <span id="candyCount">4</span> candie(s)!
+          Time's Up! You gained <span id="candyCount">4</span> candies!
         </p>
         <div class="candies" id="candies"></div>
       </div>
       <input type="text" id="selectedImageURL" style="display: none" />
+    </div>
+    <!-- Restart Button -->
+    <div>
+      <button
+        class="restartButton"
+        onclick="restartGame()"
+        style="visibility: hidden"
+      >
+        Restart Game
+      </button>
     </div>
   </body>
 </html>

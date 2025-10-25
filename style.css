@@ -16,6 +16,7 @@ body {
   transform: translate(-50%, -50%);
   background-color: #ffffdd;
   overflow: hidden;
+  z-index: 1;
 }
 
 .polypiece {
@@ -183,4 +184,19 @@ li {
   background-color: white;
   font-size: 20px;
   color: white;
+}
+.restartButton {
+  position: fixed;
+  font-size: 50px;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
+  color: rgb(255, 255, 255);
+  border: solid;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 10000;
+  visibility: hidden;
+  top: 60%;
+  left: 37.5%;
 }

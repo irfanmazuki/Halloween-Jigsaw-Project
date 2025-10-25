@@ -1597,6 +1597,22 @@ autoStart = isMiniature(); // used for nice miniature in CodePen
 loadInitialFile();
 requestAnimationFrame(animate);
 
+window.restartGame = function () {
+  $("#gameStatus").text("🎮 Game restarted!");
+
+  // Hide restart button again smoothly
+  $(".restartButton").fadeOut(300, function () {
+    $(this).css("visibility", "hidden");
+  });
+
+  // Hide end-game modal
+  document.getElementById("myModal2").style.display = "none";
+
+  // Show the image selection modal again
+  const instr = document.getElementById("myModal");
+  if (instr) instr.style.display = "block";
+};
+
 function updatePieceCount() {
   const count = puzzle.polyPieces.length - 1;
   remainingPieces = count;
@@ -1639,18 +1655,20 @@ function updateTimerDisplay() {
 
 // End Game condition function
 function gameEnded() {
+  $(".restartButton").css("visibility", "visible").hide().fadeIn(400);
   let candies = 0;
   if (remainingPieces === 0) {
     candies = 5;
-  } else if (remainingPieces <= 2) {
+  } else if (remainingPieces === 1) {
     candies = 4;
-  } else if (remainingPieces <= 3) {
+  } else if (remainingPieces === 2) {
     candies = 3;
-  } else if (remainingPieces <= 4) {
+  } else if (remainingPieces === 3) {
     candies = 2;
-  } else if (remainingPieces <= 10) {
+  } else if (remainingPieces >= 4) {
     candies = 1;
   }
+
   const myModal2 = document.getElementById("myModal2");
   myModal2.style.display = "block";
   let candyDiv = document.getElementById("candies");
