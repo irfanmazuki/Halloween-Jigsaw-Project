@@ -1276,7 +1276,7 @@ function loadInitialFile() {
 window.selectImage = function (url) {
   var sectionGame = document.getElementById("game");
   var sectionSelection = document.getElementById("selection");
-  sectionGame.style.display = "block";
+  sectionGame.style.display = "";
   sectionSelection.style.display = "none";
 
   console.log("selectImage called with url:", url);
@@ -1603,19 +1603,23 @@ loadInitialFile();
 requestAnimationFrame(animate);
 
 window.restartGame = function () {
+  var sectionGame = document.getElementById("game");
+  var sectionSelection = document.getElementById("selection");
+  sectionSelection.style.display = "";
+  sectionGame.style.display = "none";
   $("#gameStatus").text("🎮 Game restarted!");
 
   // Hide restart button again smoothly
   $(".restartButton").fadeOut(300, function () {
     $(this).css("visibility", "hidden");
   });
-
-  // Hide end-game modal
   document.getElementById("myModal2").style.display = "none";
 
   // Show the image selection modal again
   const instr = document.getElementById("myModal");
   if (instr) instr.style.display = "block";
+
+  // Hide end-game modal
 };
 
 function updatePieceCount() {
@@ -1630,7 +1634,7 @@ let timerSeconds = 60;
 
 function startTimer() {
   stopTimer();
-  timerSeconds = 30;
+  timerSeconds = 5;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timerSeconds--;
