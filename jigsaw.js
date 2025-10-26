@@ -1634,7 +1634,7 @@ let timerSeconds = 60;
 
 function startTimer() {
   stopTimer();
-  timerSeconds = 5;
+  timerSeconds = 1;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timerSeconds--;
