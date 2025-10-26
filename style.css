@@ -1,4 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Scope+One|Shrikhand");
+
 body {
+  margin: 0;
+  padding: 0;
+}
+
+#game {
   font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
   background-color: #fff;
   margin: 0;
@@ -198,4 +205,56 @@ li {
   visibility: hidden;
   top: 60%;
   left: 37.5%;
+}
+
+#selection {
+  background-image: url(https://piktochart.com/wp-content/uploads/2023/10/large-283-600x338.jpg);
+  background-size: cover;
+  background-color: rebeccapurple;
+  color: #fff;
+  display: grid;
+  font-family: "Scope One", serif;
+  font-size: 22px;
+  height: 100%;
+}
+
+div {
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  position: relative;
+  top: -40px;
+  font-family: "Shrikhand", cursive;
+  font-size: 75px;
+}
+
+h2 {
+  color: #cccccc;
+  text-shadow: 2px 2px 8px #cccccc;
+  font-size: 1.5rem;
+  margin-top: -100px;
+}
+
+.image-shelf {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  box-align: middle;
+  margin-top: -20px;
+  gap: 15px;
+}
+
+.picture {
+  width: 210px;
+  height: 315px;
+  border: 5px solid #cc7a00;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px 2px #995c00;
+  object-fit: cover;
+}
+
+.picture:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s;
 }

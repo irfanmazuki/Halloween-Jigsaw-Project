@@ -14,34 +14,88 @@
     />
   </head>
   <body>
-    <div id="puzzleCount" class="puzzleCount">Pieces Left:</div>
-    <div id="timer" class="timer">00:00</div>
-    <div id="forPuzzle"></div>
-    <ul id="menu">
-      <li>&#x2630;</li>
-      <li>_</li>
-      <li>_</li>
-      <li>
-        shape:
-        <select id="shape">
-          <option value="1" selected>_</option>
-          <option value="2">_</option>
-          <option value="3">_</option>
-          <option value="4">_</option>
-        </select>
-      </li>
-      <li>_</li>
-      <li>_</li>
-      <li>_</li>
-      <li>_</li>
-      <li>_</li>
-    </ul>
+    <section id="selection">
+      <div>
+        <div>
+          <h1 class="title">Jigsaw Puzzle</h1>
+        </div>
+        <h2>Choose a Puzzle...</h2>
+      </div>
+      <div class="image-shelf">
+        <img
+          class="picture"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRphdeMO3c56E2CSYAbDVgXm1GXW0OhGAbSQ&s"
+          onclick="selectImage(this.src)"
+        />
+        <img
+          class="picture"
+          src="https://media.livewallpapers.com/images/high/spooky-halloween-phone-wallpaper-25.webp"
+          onclick="selectImage(this.src)"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+        <img
+          class="picture"
+          src="https://centenaries.ucd.ie/wp-content/uploads/2017/05/placeholder-400x600.png"
+        />
+      </div>
+    </section>
+    <section id="game">
+      <div id="puzzleCount" class="puzzleCount">Pieces Left:</div>
+      <div id="timer" class="timer">00:00</div>
+      <div id="forPuzzle"></div>
+      <ul id="menu">
+        <li>&#x2630;</li>
+        <li>_</li>
+        <li>_</li>
+        <li>
+          shape:
+          <select id="shape">
+            <option value="1" selected>_</option>
+            <option value="2">_</option>
+            <option value="3">_</option>
+            <option value="4">_</option>
+          </select>
+        </li>
+        <li>_</li>
+        <li>_</li>
+        <li>_</li>
+        <li>_</li>
+        <li>_</li>
+      </ul>
+    </section>
 
     <!-- Trigger/Open The Modal -->
     <button id="myBtn">Open Modal</button>
 
     <!-- The Instruction Modal -->
-    <div id="myModal" class="modal">
+    <!-- <div id="myModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModal(1)">&times;</span>
         <p>
@@ -70,7 +124,7 @@
           onclick="selectImage(this.src)"
         />
       </div>
-    </div>
+    </div> -->
 
     <!-- The End Game Modal -->
     <div id="myModal2" class="modal" style="display: none">
@@ -93,4 +147,8 @@
     </div>
     <!-- Restart Button -->
   </body>
+  <script>
+    var gameSection = document.getElementById("game");
+    gameSection.style.display = "none";
+  </script>
 </html>

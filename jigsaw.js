@@ -1274,6 +1274,11 @@ function loadInitialFile() {
 }
 
 window.selectImage = function (url) {
+  var sectionGame = document.getElementById("game");
+  var sectionSelection = document.getElementById("selection");
+  sectionGame.style.display = "block";
+  sectionSelection.style.display = "none";
+
   console.log("selectImage called with url:", url);
   const input = document.getElementById("selectedImageURL");
   if (input) input.value = url;
