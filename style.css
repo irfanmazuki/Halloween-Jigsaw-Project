@@ -252,10 +252,47 @@ h2 {
   border-radius: 8px;
   box-shadow: 5px 5px 10px 2px #995c00;
   object-fit: cover;
+  visibility: visible;
 }
 
 .picture:hover {
   transform: scale(1.1);
   transition: transform 0.3s;
   cursor: pointer;
+}
+
+#bat {
+  visibility: visible;
+}
+
+#spiders {
+  visibility: visible;
+}
+
+#pumpkin {
+  visibility: visible;
+}
+
+#candy {
+  visibility: visible;
+}
+
+#tree {
+  visibility: visible;
+}
+
+#witchduck {
+  visibility: visible;
+}
+
+#duck {
+  visibility: visible;
+}
+
+#donald {
+  visibility: visible;
+}
+
+#duck2 {
+  visibility: visible;
 }

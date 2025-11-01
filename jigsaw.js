@@ -511,7 +511,9 @@ class PolyPiece {
           edge == tbEdges[k].edge
         )
           return k;
-        updatePieceCount(); // found it
+        const sound = new Audio("sound/single-key-press-393908.mp3"); // <-- path to your sound file
+        sound.play(); // found it
+        updatePieceCount();
       }
       return false; // not found
     } // function edgeIsInTbEdges
@@ -1634,7 +1636,7 @@ let timerSeconds = 60;
 
 function startTimer() {
   stopTimer();
-  timerSeconds = 1;
+  timerSeconds = 60;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timerSeconds--;
